@@ -87,28 +87,28 @@
 <meta property="og:site_name" content="南风北巷">
 <meta property="og:description" content="好记性不如烂笔头">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190313162011284.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/20190313162011284.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/20190313162032404.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190313162149681.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190313162217192.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2019031316224242.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190313162259147.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2plY3Rfc3Vu,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190313162338182.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2019031316244739.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190313162554421.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190313162617816.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2019031316270556.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190313162755231.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2plY3Rfc3Vu,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190313162819802.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190313162840948.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190313162853254.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190313162922853.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2plY3Rfc3Vu,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190313162945766.png">
-<meta property="og:updated_time" content="2019-03-13T15:16:17.982Z">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/20190313162149681.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/20190313162217192.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/2019031316224242.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/20190313162259147.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/20190313162338182.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/2019031316244739.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/20190313162554421.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/20190313162617816.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/2019031316270556.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/20190313162755231.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/20190313162819802.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/20190313162840948.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/20190313162853254.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/20190313162922853.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/springboot/20190313162945766.png">
+<meta property="og:updated_time" content="2019-03-13T15:27:13.431Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Boot获取前端页面参数的几种方式总结">
 <meta name="twitter:description" content="好记性不如烂笔头">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190313162011284.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/13/springboot/20190313162011284.png">
 
 
 
@@ -353,15 +353,15 @@
 </blockquote>
 <a id="more"></a> 
 <p>Spring Boot的一个好处就是通过注解可以轻松获取前端页面的参数，之后可以将参数经过一系列处理传送到后台数据库，前段时间正好用到，但是忘得差不多了，获得的方式有很多种，这种东西不写下来一段时间不用就忘得差不多了，感觉记性越来越差了呢，这里稍微总结一下，大致分为以下几种： </p>
-<p>1.指定前端url请求参数名称与方法名一致，见下图，这种方式简单来说就是url请求格式中的参数需要与方法的参数名称对应上，举个例子，这么一个url请求<a href="http://localhost:8080/0919/test1?name=xxx&amp;pwd=yyy，在指定的控制器类上加上Controller注解，同时指定RequestMapping注解即可，当请求路径参数与方法参数匹配上时会自动注入" target="_blank" rel="noopener">http://localhost:8080/0919/test1?name=xxx&amp;pwd=yyy，在指定的控制器类上加上Controller注解，同时指定RequestMapping注解即可，当请求路径参数与方法参数匹配上时会自动注入</a><br><img src="https://img-blog.csdnimg.cn/20190313162011284.png" alt="在这里插入图片描述"><br>启动主程序，访问浏览器出现下图，表明注入参数成功，这种方式一般是get请求<br><img src="/2019/03/13/springboot/20190313162032404.png" alt="在这里插入图片描述"><br>2.第二种方式是通过HttpServletRequest来获取前端页面参数，代码见下图 ，简单来说就是通过调用request的getParameter方法来获取参数，比如访问路径类似这样<a href="http://localhost:8080/0919/test2?firstName=zhang&amp;lastName=san" target="_blank" rel="noopener">http://localhost:8080/0919/test2?firstName=zhang&amp;lastName=san</a><br><img src="https://img-blog.csdnimg.cn/20190313162149681.png" alt="在这里插入图片描述"><br>启动主程序，访问浏览器出现下图，表明注入参数成功，这种方式也可以获取表单参数，一般get和post请求都可以<br><img src="https://img-blog.csdnimg.cn/20190313162217192.png" alt="在这里插入图片描述"><br>3.第三种方式是通过创建一个JavaBean对象来封装表单参数或者是请求url路径中的参数，具体代码见下图<br><img src="https://img-blog.csdnimg.cn/2019031316224242.png" alt="在这里插入图片描述"><br>对应的JavaBean对象是下面这个<br><img src="https://img-blog.csdnimg.cn/20190313162259147.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2plY3Rfc3Vu,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>简单来说就是将表单参数作为一个JavaBean类的属性，通过设置方法参数为一个JavaBean对象，之后在方法中通过调用对象的get方法来获取表单传过来的参数，比如访问路径是这个<a href="http://localhost:8080/0919/test3?firstName=zhang&amp;lastName=san" target="_blank" rel="noopener">http://localhost:8080/0919/test3?firstName=zhang&amp;lastName=san</a> 启动主程序，在浏览器访问见下图，表明注入参数成功，这种方式如果请求的表单参数很多可以考虑使用这种方式<br><img src="https://img-blog.csdnimg.cn/20190313162338182.png" alt="在这里插入图片描述"></p>
-<p>４.第四种方式是通过PathVariable注解来绑定请求路径的参数，参考代码见下<br><img src="https://img-blog.csdnimg.cn/2019031316244739.png" alt="在这里插入图片描述"><br>这种情况简单来说就是url中采用动态绑定的形式表示，之后在方法中指定的参数通过PathVariable来将请求的url中的参数绑定到方法参数，这里在不指定PathVariable注解的具体值时按照请求路径中的动态变量顺序与注解顺序一致即可注入 ，如果想指定注入，那么指定PathVariable注解的值与动态变量的名一致即可特定注入。比如请求路径是这个<a href="http://localhost:8080/0919/test4/111/222" target="_blank" rel="noopener">http://localhost:8080/0919/test4/111/222</a><br>启动主程序，在浏览器访问，出现下图表明注入参数成功<br><img src="https://img-blog.csdnimg.cn/20190313162554421.png" alt="在这里插入图片描述"></p>
-<p>５.第五种方式是通过RequestParam注解来获取，具体代码见下<br><img src="https://img-blog.csdnimg.cn/20190313162617816.png" alt="在这里插入图片描述"><br>这种方式是通过url路径的形式将请求路径上的参数绑定到方法的参数上，简单来说就是实参值赋给相应的形参，与上面那种方式的区别是前者是动态url模板注入，这里是个普通的url请求注入·，比如访问路径是这个<a href="http://localhost:8080/0919/test5?aaa=111&amp;bbb=4444" target="_blank" rel="noopener">http://localhost:8080/0919/test5?aaa=111&amp;bbb=4444</a><br>启动主程序，访问该请求，浏览器出现下面这个表明注入参数成功，这里可以通过指定RequestParam的value值来指定url请求路径参数指定注入到哪个具体方法参数，不过一般两者名字一致比较方便<br><img src="https://img-blog.csdnimg.cn/2019031316270556.png" alt="在这里插入图片描述"></p>
+<p>1.指定前端url请求参数名称与方法名一致，见下图，这种方式简单来说就是url请求格式中的参数需要与方法的参数名称对应上，举个例子，这么一个url请求<a href="http://localhost:8080/0919/test1?name=xxx&amp;pwd=yyy，在指定的控制器类上加上Controller注解，同时指定RequestMapping注解即可，当请求路径参数与方法参数匹配上时会自动注入" target="_blank" rel="noopener">http://localhost:8080/0919/test1?name=xxx&amp;pwd=yyy，在指定的控制器类上加上Controller注解，同时指定RequestMapping注解即可，当请求路径参数与方法参数匹配上时会自动注入</a><br><img src="/2019/03/13/springboot/20190313162011284.png" alt="在这里插入图片描述"><br>启动主程序，访问浏览器出现下图，表明注入参数成功，这种方式一般是get请求<br><img src="/2019/03/13/springboot/20190313162032404.png" alt="在这里插入图片描述"><br>2.第二种方式是通过HttpServletRequest来获取前端页面参数，代码见下图 ，简单来说就是通过调用request的getParameter方法来获取参数，比如访问路径类似这样<a href="http://localhost:8080/0919/test2?firstName=zhang&amp;lastName=san" target="_blank" rel="noopener">http://localhost:8080/0919/test2?firstName=zhang&amp;lastName=san</a><br><img src="/2019/03/13/springboot/20190313162149681.png" alt="在这里插入图片描述"><br>启动主程序，访问浏览器出现下图，表明注入参数成功，这种方式也可以获取表单参数，一般get和post请求都可以<br><img src="/2019/03/13/springboot/20190313162217192.png" alt="在这里插入图片描述"><br>3.第三种方式是通过创建一个JavaBean对象来封装表单参数或者是请求url路径中的参数，具体代码见下图<br><img src="/2019/03/13/springboot/2019031316224242.png" alt="在这里插入图片描述"><br>对应的JavaBean对象是下面这个<br><img src="/2019/03/13/springboot/20190313162259147.png" alt="在这里插入图片描述"><br>简单来说就是将表单参数作为一个JavaBean类的属性，通过设置方法参数为一个JavaBean对象，之后在方法中通过调用对象的get方法来获取表单传过来的参数，比如访问路径是这个<a href="http://localhost:8080/0919/test3?firstName=zhang&amp;lastName=san" target="_blank" rel="noopener">http://localhost:8080/0919/test3?firstName=zhang&amp;lastName=san</a> 启动主程序，在浏览器访问见下图，表明注入参数成功，这种方式如果请求的表单参数很多可以考虑使用这种方式<br><img src="/2019/03/13/springboot/20190313162338182.png" alt="在这里插入图片描述"></p>
+<p>４.第四种方式是通过PathVariable注解来绑定请求路径的参数，参考代码见下<br><img src="/2019/03/13/springboot/2019031316244739.png" alt="在这里插入图片描述"><br>这种情况简单来说就是url中采用动态绑定的形式表示，之后在方法中指定的参数通过PathVariable来将请求的url中的参数绑定到方法参数，这里在不指定PathVariable注解的具体值时按照请求路径中的动态变量顺序与注解顺序一致即可注入 ，如果想指定注入，那么指定PathVariable注解的值与动态变量的名一致即可特定注入。比如请求路径是这个<a href="http://localhost:8080/0919/test4/111/222" target="_blank" rel="noopener">http://localhost:8080/0919/test4/111/222</a><br>启动主程序，在浏览器访问，出现下图表明注入参数成功<br><img src="/2019/03/13/springboot/20190313162554421.png" alt="在这里插入图片描述"></p>
+<p>５.第五种方式是通过RequestParam注解来获取，具体代码见下<br><img src="/2019/03/13/springboot/20190313162617816.png" alt="在这里插入图片描述"><br>这种方式是通过url路径的形式将请求路径上的参数绑定到方法的参数上，简单来说就是实参值赋给相应的形参，与上面那种方式的区别是前者是动态url模板注入，这里是个普通的url请求注入·，比如访问路径是这个<a href="http://localhost:8080/0919/test5?aaa=111&amp;bbb=4444" target="_blank" rel="noopener">http://localhost:8080/0919/test5?aaa=111&amp;bbb=4444</a><br>启动主程序，访问该请求，浏览器出现下面这个表明注入参数成功，这里可以通过指定RequestParam的value值来指定url请求路径参数指定注入到哪个具体方法参数，不过一般两者名字一致比较方便<br><img src="/2019/03/13/springboot/2019031316270556.png" alt="在这里插入图片描述"></p>
 <p>6.第六种方式是通过ModelAttribute方式来注入参数，具体代码见下 </p>
-<p><img src="https://img-blog.csdnimg.cn/20190313162755231.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2plY3Rfc3Vu,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="/2019/03/13/springboot/20190313162755231.png" alt="在这里插入图片描述"></p>
 <p>这种方式一般是通过在页面展示，所以这里创建两个页面做测试test2.jsp和test3.jsp进行测试</p>
-<p><img src="https://img-blog.csdnimg.cn/20190313162819802.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190313162840948.png" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/20190313162853254.png" alt="在这里插入图片描述"><br>简单来说就是通过ModelAttribute注解将请求参数封装到指定的JavaBean对象，同时通过value值将这个接受了表单参数的对象赋给value，这里就是将s赋给了一个变量名为kkk的存在，之后就可以在jsp页面通过这个变量名使用el表达式来获取从表单传过来的参数，这里测试路径是<a href="http://localhost:8080/0919/kkk，访问在浏览器进行测试，见下图" target="_blank" rel="noopener">http://localhost:8080/0919/kkk，访问在浏览器进行测试，见下图</a> </p>
-<p><img src="https://img-blog.csdnimg.cn/20190313162922853.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Byb2plY3Rfc3Vu,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 点击提交，出现下图，表明表单参数成功被后台接受并在前台页面输出，这种方式一般是需要在前台页面输出的时候使用<br> <img src="https://img-blog.csdnimg.cn/20190313162945766.png" alt="在这里插入图片描述"><br> 总的来说Spring Boot获取前端页面参数的方式大致就上面这几种，可以根据自己的实际情况来选择其中的任意一种方式，个人一般推荐前三种方式，当然具体选哪种还是因人而异。这里简单写了一点简单demo做下测试记录防止长时间不用又忘了，毕竟博客的作用就是这样嘛。</p>
+<p><img src="/2019/03/13/springboot/20190313162819802.png" alt="在这里插入图片描述"><br><img src="/2019/03/13/springboot/20190313162840948.png" alt="在这里插入图片描述"></p>
+<p><img src="/2019/03/13/springboot/20190313162853254.png" alt="在这里插入图片描述"><br>简单来说就是通过ModelAttribute注解将请求参数封装到指定的JavaBean对象，同时通过value值将这个接受了表单参数的对象赋给value，这里就是将s赋给了一个变量名为kkk的存在，之后就可以在jsp页面通过这个变量名使用el表达式来获取从表单传过来的参数，这里测试路径是<a href="http://localhost:8080/0919/kkk，访问在浏览器进行测试，见下图" target="_blank" rel="noopener">http://localhost:8080/0919/kkk，访问在浏览器进行测试，见下图</a> </p>
+<p><img src="/2019/03/13/springboot/20190313162922853.png" alt="在这里插入图片描述"><br> 点击提交，出现下图，表明表单参数成功被后台接受并在前台页面输出，这种方式一般是需要在前台页面输出的时候使用<br> <img src="/2019/03/13/springboot/20190313162945766.png" alt="在这里插入图片描述"><br> 总的来说Spring Boot获取前端页面参数的方式大致就上面这几种，可以根据自己的实际情况来选择其中的任意一种方式，个人一般推荐前三种方式，当然具体选哪种还是因人而异。这里简单写了一点简单demo做下测试记录防止长时间不用又忘了，毕竟博客的作用就是这样嘛。</p>
 
       
     </div>
