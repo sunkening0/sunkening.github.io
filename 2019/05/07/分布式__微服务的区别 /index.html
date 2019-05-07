@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="分布式,微服务,">
 
 
 
@@ -77,16 +77,21 @@
 
 
 
-<meta name="description" content="south wind">
-<meta property="og:type" content="website">
-<meta property="og:title" content="南风北巷">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="分布式和微服务的区别">
+<meta name="keywords" content="分布式,微服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式和微服务的区别">
+<meta property="og:url" content="http://yoursite.com/2019/05/07/分布式__微服务的区别 /index.html">
 <meta property="og:site_name" content="南风北巷">
-<meta property="og:description" content="south wind">
+<meta property="og:description" content="分布式和微服务的区别">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/05/07/分布式__微服务的区别%20/fenbushi/weifuwu.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/07/分布式__微服务的区别%20/fenbushi/fenbushi.png">
+<meta property="og:updated_time" content="2019-05-07T03:12:36.768Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="南风北巷">
-<meta name="twitter:description" content="south wind">
+<meta name="twitter:title" content="分布式和微服务的区别">
+<meta name="twitter:description" content="分布式和微服务的区别">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/07/分布式__微服务的区别%20/fenbushi/weifuwu.png">
 
 
 
@@ -116,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/07/分布式__微服务的区别 /">
 
 
 
 
 
-  <title>南风北巷</title>
+  <title>分布式和微服务的区别 | 南风北巷</title>
   
 
 
@@ -141,8 +146,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -245,9 +249,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -277,9 +281,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/07/分布式__微服务的区别 /" itemprop="url">分布式和微服务的区别</a></h1>
+          <h1 class="post-title" itemprop="name headline">分布式和微服务的区别</h1>
         
 
         <div class="post-meta">
@@ -351,18 +353,18 @@
       
 
       
-        
-          <blockquote>
+        <blockquote>
 <p>分布式和微服务的区别</p>
 </blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/07/分布式__微服务的区别 /" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<a id="more"></a> 
+<h1 id="什么是微服务"><a href="#什么是微服务" class="headerlink" title="什么是微服务?"></a>什么是微服务?</h1><p>微服务是一种面向服务的架构(SOA)风格（Java开发人员最重要的技能之一），其中，应用程序被构建为多个不同的小型服务的集合而不是单个应用程序。与单个程序不同的是，微服务让你可以同时运行多个独立的应用程序，而这些独立的应用程序可以使用不同的编码或编程语言来创建。庞大而又复杂的应用程序可以由多个可自行执行的简单而又独立的程序所组成。这些较小的程序组合在一起，可以提供庞大的单程序所具备的所有功能。<br><img src="/2019/05/07/分布式__微服务的区别 /fenbushi/weifuwu.png" alt="在这里插入图片描述"></p>
+<h1 id="什么是分布式？"><a href="#什么是分布式？" class="headerlink" title="什么是分布式？"></a>什么是分布式？</h1><p>所谓分布式,无非就是将一个系统拆分成多个子系统并分布到多个服务器上.<br>简单的说，是指将用户界面、控制台服务、数据库管理三个层次部署在不同的位置上。其中用户界面是客户端实现的功能，控制台服务是一个专门的服务器，数据管理是在一个专门的数据库服务器上实现的。<br><img src="/2019/05/07/分布式__微服务的区别 /fenbushi/fenbushi.png" alt="在这里插入图片描述"></p>
+<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>分布式是从整体架构的war包里把service层压力大的service独立成单独的服务（jar包启动）。<br>微服务是从整体war包里将controller，service完全拆分出来作为一个独立的服务，数据库也要拆分成独立的数据库。每一个微服务都是一个完整的服务（从http请求到返回），<br>在微服务内部，将需要对外提供的接口包装成RPC接口，对外部开放。</p>
+<h1 id="关于微服务是否必须包装RPC接口的问题"><a href="#关于微服务是否必须包装RPC接口的问题" class="headerlink" title="关于微服务是否必须包装RPC接口的问题"></a>关于微服务是否必须包装RPC接口的问题</h1><p>既然有http 请求，为什么还要用rpc(dubbo接口)调用？<br>http好比普通话，rpc好比团伙内部黑话。</p>
+<p>讲普通话，好处就是谁都听得懂，谁都会讲。<br>讲黑话，好处是可以更精简、更加保密、更加可定制，坏处就是要求“说”黑话的那一方（client端）也要懂，而且一旦大家都说一种黑话了，换黑话就困难了。</p>
+<p>RPC主要是基于TCP/IP协议的，而HTTP服务主要是基于HTTP协议的，我们都知道HTTP协议是在传输层协议TCP之上的，所以效率来看的话，RPC当然是要更胜一筹啦！</p>
+<p>但是所谓的效率优势是针对http1.1协议来讲的，http2.0协议已经优化编码效率问题，像grpc（Google最近公布的开源软件）这种rpc库使用的就是http2.0协议。这么来说吧http容器的性能测试单位通常是kqps，自定义tpc协议则通常是以10kqps到100kqps为基准<br>简单来说成熟的rpc库相对http容器，跟多的是封装了“服务发现”，”错误重试”一类面向服务的高级特性。可以这么理解，rpc框架是面向服务的更高级的封装。如果把一个http server容器上封装一层服务发现和函数代理调用，那它就已经可以做一个rpc框架了。<br>所以为什么要用rpc调用？<br>因为良好的rpc调用是面向服务的封装，针对服务的可用性和效率等都做了优化。单纯使用http调用则缺少了这些特性。<br>springcloud就是使用http协议通信的<br>dubbo使用的协议有很多种(rmi,hessian等)，常用的协议Dubbo。</p>
+
       
     </div>
     
@@ -377,310 +379,38 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/java创建对象有哪几种方式 /">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="sunkening">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/smoky.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="南风北巷">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/20/java创建对象有哪几种方式 /" itemprop="url">Java中创建对象的5种方式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-20T10:02:47+08:00">
-                2019-03-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javase/" itemprop="url" rel="index">
-                    <span itemprop="name">javase</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/分布式/" rel="tag"># 分布式</a>
           
-
+            <a href="/tags/微服务/" rel="tag"># 微服务</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <blockquote>
-<p>Java中创建对象的5种方式</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/03/20/java创建对象有哪几种方式 /" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/20/java创建对象有哪几种方式 /" rel="next" title="Java中创建对象的5种方式">
+                <i class="fa fa-chevron-left"></i> Java中创建对象的5种方式
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/13/springboot/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="sunkening">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/smoky.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="南风北巷">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/13/springboot/" itemprop="url">Spring Boot获取前端页面参数的几种方式总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-13T17:02:47+08:00">
-                2019-03-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <blockquote>
-<p>Spring Boot的一个好处就是通过注解可以轻松获取前端页面的参数</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/03/13/springboot/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -690,10 +420,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -701,6 +432,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -721,8 +456,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -800,6 +544,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是微服务"><span class="nav-number">1.</span> <span class="nav-text">什么是微服务?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是分布式？"><span class="nav-number">2.</span> <span class="nav-text">什么是分布式？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#区别"><span class="nav-number">3.</span> <span class="nav-text">区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于微服务是否必须包装RPC接口的问题"><span class="nav-number">4.</span> <span class="nav-text">关于微服务是否必须包装RPC接口的问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -940,6 +700,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
