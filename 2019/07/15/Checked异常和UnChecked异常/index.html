@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="javase,">
 
 
 
@@ -77,16 +77,18 @@
 
 
 
-<meta name="description" content="south wind">
-<meta property="og:type" content="website">
-<meta property="og:title" content="南风北巷">
-<meta property="og:url" content="http://yoursite.com/categories/spring/index.html">
+<meta name="description" content="Exception类下分为RuntimeException(即unchecked异常)和其他异常(即checked异常)。">
+<meta name="keywords" content="javase">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Checked异常和UnChecked异常">
+<meta property="og:url" content="http://yoursite.com/2019/07/15/Checked异常和UnChecked异常/index.html">
 <meta property="og:site_name" content="南风北巷">
-<meta property="og:description" content="south wind">
+<meta property="og:description" content="Exception类下分为RuntimeException(即unchecked异常)和其他异常(即checked异常)。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-15T14:07:29.501Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="南风北巷">
-<meta name="twitter:description" content="south wind">
+<meta name="twitter:title" content="Checked异常和UnChecked异常">
+<meta name="twitter:description" content="Exception类下分为RuntimeException(即unchecked异常)和其他异常(即checked异常)。">
 
 
 
@@ -116,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/spring/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/15/Checked异常和UnChecked异常/">
 
 
 
 
 
-  <title>分类: spring | 南风北巷</title>
+  <title>Checked异常和UnChecked异常 | 南风北巷</title>
   
 
 
@@ -141,7 +143,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -245,53 +247,177 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>spring<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/15/Checked异常和UnChecked异常/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sunkening">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/smoky.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南风北巷">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/03/13/springboot/" itemprop="url">
-              
-                <span itemprop="name">Spring Boot获取前端页面参数的几种方式总结</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Checked异常和UnChecked异常</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-13T17:02:47+08:00" content="2019-03-13">
-          03-13
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-15T10:02:47+08:00">
+                2019-07-15
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javase/" itemprop="url" rel="index">
+                    <span itemprop="name">javase</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Exception类下分为RuntimeException(即unchecked异常)和其他异常(即checked异常)。</p>
+</blockquote>
+<a id="more"></a> 
+<ul>
+<li>Exception类下分为RuntimeException(即unchecked异常)和其他异常(即checked异常)。 *</li>
+</ul>
+<h1 id="Checked异常"><a href="#Checked异常" class="headerlink" title="Checked异常"></a>Checked异常</h1><p>Checked异常，顾名思义，是可检查的异常，即在编译阶段IDE会提示让程序员对该异常进行处理的，比如IOException就是一种Checked异常，我们在对文件进行操作的时候，如果不对其进行异常处理IDE就会提示我们需要在此操作时进行异常处理，否则无法通过编译。</p>
+<h1 id="UnChecked异常"><a href="#UnChecked异常" class="headerlink" title="UnChecked异常"></a>UnChecked异常</h1><p>RuntimeException，是指如果不写关于这些类的异常处理，代码仍然可以通过编译，但是在运行时可能会出现的错误。在我们判断得出程序在运行时可能会出现的这些错误可以对这些异常进行处理，比如IndexOutOfBoundsException(数组越界异常)、NullPointerException(空指针异常)等；还有就是在平常不太熟悉的，我们在编写代码时往往会忽略掉的异常。这两者都是运行时异常，我们只能够对其更大程度的捕获和处理从而提高代码的健壮性。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javase/" rel="tag"># javase</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/22/vue中，new vue({})与export default {} 两者的区别/" rel="next" title="vue中，new vue({})与export default {} 两者的区别？">
+                <i class="fa fa-chevron-left"></i> vue中，new vue({})与export default {} 两者的区别？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -299,6 +425,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -319,8 +449,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -398,6 +537,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Checked异常"><span class="nav-number">1.</span> <span class="nav-text">Checked异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UnChecked异常"><span class="nav-number">2.</span> <span class="nav-text">UnChecked异常</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -538,6 +693,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
