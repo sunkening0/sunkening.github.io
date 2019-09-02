@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="springboot,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="南风北巷" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="因项目是集群部署，因此同样的定时任务，在集群中的每台机器都会执行，这样定时任务就会重复执行，不但会增加服务器的负担，还会因为定时任务重复执行造成额外的不可预期的错误。因此下面采用 spring-boot-starter-quartz 实现分布式任务部署。">
+<meta name="keywords" content="springboot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springboot2.0 + quartz 分布式定时任务">
+<meta property="og:url" content="http://yoursite.com/2019/07/30/springboot2.0 + quartz 分布式定时任务/index.html">
+<meta property="og:site_name" content="南风北巷">
+<meta property="og:description" content="因项目是集群部署，因此同样的定时任务，在集群中的每台机器都会执行，这样定时任务就会重复执行，不但会增加服务器的负担，还会因为定时任务重复执行造成额外的不可预期的错误。因此下面采用 spring-boot-starter-quartz 实现分布式任务部署。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019090223484888.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190902234941532.png">
+<meta property="og:updated_time" content="2019-09-02T16:05:34.178Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="springboot2.0 + quartz 分布式定时任务">
+<meta name="twitter:description" content="因项目是集群部署，因此同样的定时任务，在集群中的每台机器都会执行，这样定时任务就会重复执行，不但会增加服务器的负担，还会因为定时任务重复执行造成额外的不可预期的错误。因此下面采用 spring-boot-starter-quartz 实现分布式任务部署。">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2019090223484888.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/30/springboot2.0 + quartz 分布式定时任务/">
+
+
+
+
+
+  <title>springboot2.0 + quartz 分布式定时任务 | 南风北巷</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband">
+<a href="https://github.com/sunkening0/" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    </div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">南风北巷</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Developer</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/springboot2.0 + quartz 分布式定时任务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sunkening">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/smoky.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南风北巷">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">springboot2.0 + quartz 分布式定时任务</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-30T21:14:56+08:00">
+                2019-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>因项目是集群部署，因此同样的定时任务，在集群中的每台机器都会执行，这样定时任务就会重复执行，不但会增加服务器的负担，还会因为定时任务重复执行造成额外的不可预期的错误。因此下面采用 spring-boot-starter-quartz 实现分布式任务部署。</p>
+<a id="more"></a> 
+<h2 id="使用步骤："><a href="#使用步骤：" class="headerlink" title="使用步骤："></a>使用步骤：</h2><p>版本信息：<br>springboot：2.1.6<br>quartz：2.3.1</p>
+<h3 id="1、pom配置"><a href="#1、pom配置" class="headerlink" title="1、pom配置"></a>1、pom配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line"> 	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line"> 	&lt;artifactId&gt;spring-boot-starter-quartz&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2、application-quartz-yml配置"><a href="#2、application-quartz-yml配置" class="headerlink" title="2、application-quartz.yml配置"></a>2、application-quartz.yml配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  quartz:</span><br><span class="line">    job-store-type: jdbc #数据库方式</span><br><span class="line">    jdbc:</span><br><span class="line">      initialize-schema: never #不初始化表结构</span><br><span class="line">    properties:</span><br><span class="line">      org:</span><br><span class="line">        quartz:</span><br><span class="line">          scheduler:</span><br><span class="line">            instanceId: AUTO #默认主机名和时间戳生成实例ID,可以是任何字符串，但对于所有调度程序来说，必须是唯一的 对应qrtz_scheduler_state INSTANCE_NAME字段</span><br><span class="line">            #instanceName: clusteredScheduler #quartzScheduler</span><br><span class="line">          jobStore:</span><br><span class="line">            class: org.quartz.impl.jdbcjobstore.JobStoreTX #持久化配置</span><br><span class="line">            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate #我们仅为数据库制作了特定于数据库的代理</span><br><span class="line">            useProperties: false #以指示JDBCJobStore将JobDataMaps中的所有值都作为字符串，因此可以作为名称 - 值对存储而不是在BLOB列中以其序列化形式存储更多复杂的对象。从长远来看，这是更安全的，因为您避免了将非String类序列化为BLOB的类版本问题。</span><br><span class="line">            tablePrefix: qrtz_  #数据库表前缀</span><br><span class="line">            misfireThreshold: 60000 #在被认为“失火”之前，调度程序将“容忍”一个Triggers将其下一个启动时间通过的毫秒数。默认值（如果您在配置中未输入此属性）为60000（60秒）。</span><br><span class="line">            clusterCheckinInterval: 5000 #设置此实例“检入”*与群集的其他实例的频率（以毫秒为单位）。影响检测失败实例的速度。</span><br><span class="line">            isClustered: true #打开集群功能</span><br><span class="line">          threadPool: #连接池</span><br><span class="line">            class: org.quartz.simpl.SimpleThreadPool</span><br><span class="line">            threadCount: 10</span><br><span class="line">            threadPriority: 5</span><br><span class="line">            threadsInheritContextClassLoaderOfInitializingThread: true</span><br></pre></td></tr></table></figure>
+<p>在application.yml文件中将上面的文件配置进去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  profiles:</span><br><span class="line">    # 运行环境 dev|test|prod,根据active动态加载application-active.yml配置文件</span><br><span class="line">    active: dev,quartz</span><br></pre></td></tr></table></figure>
+<h3 id="3、实现一个任务类"><a href="#3、实现一个任务类" class="headerlink" title="3、实现一个任务类"></a>3、实现一个任务类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Slf4j</span><br><span class="line">@DisallowConcurrentExecution</span><br><span class="line">public class Job extends QuartzJobBean &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException &#123;</span><br><span class="line">        // 获取参数</span><br><span class="line">        JobDataMap jobDataMap = jobExecutionContext.getJobDetail().getJobDataMap();</span><br><span class="line">        log.info(&quot;定时任务执行中。。。参数：&quot;+jobDataMap.get(&quot;name&quot;).toString());</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>@DisallowConcurrentExecution的作用是 保证上一个任务执行完后，再去执行下一个任务，这里的任务是同一个任务,所以这里不必担心线程安全问题了。</p>
+<h3 id="4、实现对定时任务的操作"><a href="#4、实现对定时任务的操作" class="headerlink" title="4、实现对定时任务的操作"></a>4、实现对定时任务的操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">@Slf4j</span><br><span class="line">public class ScheduleJobManage &#123;</span><br><span class="line"> @Autowired</span><br><span class="line"> private Scheduler scheduler;</span><br><span class="line"> @PostConstruct</span><br><span class="line"> public void startScheduler() &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">   // 开启调度器</span><br><span class="line">   scheduler.start();</span><br><span class="line">  &#125; catch (SchedulerException e) &#123;</span><br><span class="line">   e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> /**</span><br><span class="line">  * 使用simpleTrigger触发器触发简单任务</span><br><span class="line">  * </span><br><span class="line">  * @param jobClass</span><br><span class="line">  * @param jobName</span><br><span class="line">  * @param jobGroupName</span><br><span class="line">  * @param jobTime</span><br><span class="line">  *            每隔多长时间执行一次任务</span><br><span class="line">  * @param jobTimes</span><br><span class="line">  *            执行几次 &lt;0时不限制次数</span><br><span class="line">  * @param jobData</span><br><span class="line">  */</span><br><span class="line"> public void saveSimpleJob(Class&lt;? extends QuartzJobBean&gt; jobClass, String jobName, String jobGroupName, int jobTime,</span><br><span class="line">   int jobTimes, Map jobData) &#123;</span><br><span class="line">  log.info(&quot;新增任务&quot;);</span><br><span class="line">  try &#123;</span><br><span class="line">   // 任务名称和组构成任务key</span><br><span class="line">   JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(jobName, jobGroupName).build();</span><br><span class="line">   // 设置job参数</span><br><span class="line">   if (jobData != null &amp;&amp; jobData.size() &gt; 0) &#123;</span><br><span class="line">    jobDetail.getJobDataMap().putAll(jobData);</span><br><span class="line">   &#125;</span><br><span class="line">   // 使用simpleTrigger规则</span><br><span class="line">   Trigger trigger = null;</span><br><span class="line">   if (jobTimes &lt; 0) &#123;</span><br><span class="line">    trigger = TriggerBuilder.newTrigger().withIdentity(jobName, jobGroupName)</span><br><span class="line">      .withSchedule(SimpleScheduleBuilder.repeatSecondlyForever(1).withIntervalInSeconds(jobTime))</span><br><span class="line">      .startNow().build();</span><br><span class="line">   &#125; else &#123;</span><br><span class="line">    trigger = TriggerBuilder</span><br><span class="line">      .newTrigger().withIdentity(jobName, jobGroupName).withSchedule(SimpleScheduleBuilder</span><br><span class="line">        .repeatSecondlyForever(1).withIntervalInSeconds(jobTime).withRepeatCount(jobTimes))</span><br><span class="line">      .startNow().build();</span><br><span class="line">   &#125;</span><br><span class="line">   scheduler.scheduleJob(jobDetail, trigger);</span><br><span class="line">  &#125; catch (SchedulerException e) &#123;</span><br><span class="line">   e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> /**</span><br><span class="line">  * 使用cornTrigger触发器</span><br><span class="line">  * </span><br><span class="line">  * @param jobClass</span><br><span class="line">  * @param jobName</span><br><span class="line">  * @param jobGroupName</span><br><span class="line">  * @param cron</span><br><span class="line">  * @param jobData</span><br><span class="line">  */</span><br><span class="line"> public void saveCronJob(Class&lt;? extends QuartzJobBean&gt; jobClass, String jobName, String jobGroupName, String cron,</span><br><span class="line">   Map jobData) &#123;</span><br><span class="line">  log.info(&quot;新增任务&quot;);</span><br><span class="line">  try &#123;</span><br><span class="line">   // 任务名称和组构成任务key</span><br><span class="line">   JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(jobName, jobGroupName).build();</span><br><span class="line">   // 设置job参数</span><br><span class="line">   if (jobData != null &amp;&amp; jobData.size() &gt; 0) &#123;</span><br><span class="line">    jobDetail.getJobDataMap().putAll(jobData);</span><br><span class="line">   &#125;</span><br><span class="line">   // 使用cornTrigger规则</span><br><span class="line">   // 触发器key</span><br><span class="line">   Trigger trigger = TriggerBuilder.newTrigger().withIdentity(jobName, jobGroupName)</span><br><span class="line">     .startAt(DateBuilder.futureDate(1, IntervalUnit.SECOND))</span><br><span class="line">     .withSchedule(CronScheduleBuilder.cronSchedule(cron)).startNow().build();</span><br><span class="line">   // 把作业和触发器注册到任务调度中</span><br><span class="line">   scheduler.scheduleJob(jobDetail, trigger);</span><br><span class="line">  &#125; catch (SchedulerException e) &#123;</span><br><span class="line">   e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> /**</span><br><span class="line">  * 修改cron时间表达式</span><br><span class="line">  * </span><br><span class="line">  * @param jobName</span><br><span class="line">  * @param jobGroupName</span><br><span class="line">  * @param jobTime</span><br><span class="line">  */</span><br><span class="line"> public void updateJob(String jobName, String jobGroupName, String cron) &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">   TriggerKey triggerKey = TriggerKey.triggerKey(jobName, jobGroupName);</span><br><span class="line">   CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);</span><br><span class="line">   trigger = trigger.getTriggerBuilder().withIdentity(triggerKey)</span><br><span class="line">     .withSchedule(CronScheduleBuilder.cronSchedule(cron)).build();</span><br><span class="line">   // 重启触发器</span><br><span class="line">   scheduler.rescheduleJob(triggerKey, trigger);</span><br><span class="line">  &#125; catch (SchedulerException e) &#123;</span><br><span class="line">   e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> /**</span><br><span class="line">  * 删除job</span><br><span class="line">  * @param jobName</span><br><span class="line">  * @param jobGroupName</span><br><span class="line">  */</span><br><span class="line"> public void deleteJob(String jobName, String jobGroupName) &#123;</span><br><span class="line">  log.info(&quot;删除任务&quot;);</span><br><span class="line">  try &#123;</span><br><span class="line">   TriggerKey triggerKey = TriggerKey.triggerKey(jobName, jobGroupName);</span><br><span class="line">   // 停止触发器</span><br><span class="line">   scheduler.pauseTrigger(triggerKey);</span><br><span class="line">   // 移除触发器</span><br><span class="line">   scheduler.unscheduleJob(triggerKey);</span><br><span class="line">   // 删除任务</span><br><span class="line">   scheduler.deleteJob(new JobKey(jobName, jobGroupName));</span><br><span class="line">  &#125; catch (Exception e) &#123;</span><br><span class="line">   e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> /**</span><br><span class="line">  * 暂停任务</span><br><span class="line">  * </span><br><span class="line">  * @param jobName</span><br><span class="line">  * @param jobGroupName</span><br><span class="line">  */</span><br><span class="line"> public void pause(String jobName, String jobGroupName) &#123;</span><br><span class="line">  log.info(&quot;暂停任务&quot;);</span><br><span class="line">  try &#123;</span><br><span class="line">   JobKey key = new JobKey(jobName, jobGroupName);</span><br><span class="line">   scheduler.pauseJob(key);</span><br><span class="line">  &#125; catch (SchedulerException e) &#123;</span><br><span class="line">   e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> /**</span><br><span class="line">  * 恢复任务</span><br><span class="line">  * </span><br><span class="line">  * @param jobName</span><br><span class="line">  * @param jobGroupName</span><br><span class="line">  */</span><br><span class="line"> public void resume(String jobName, String jobGroupName) &#123;</span><br><span class="line">  log.info(&quot;恢复任务&quot;);</span><br><span class="line">  try &#123;</span><br><span class="line">   JobKey key = new JobKey(jobName, jobGroupName);</span><br><span class="line">   scheduler.resumeJob(key);</span><br><span class="line">  &#125; catch (SchedulerException e) &#123;</span><br><span class="line">   e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> /**</span><br><span class="line">  * 触发任务 立即执行</span><br><span class="line">  * </span><br><span class="line">  * @param jobName</span><br><span class="line">  * @param jobGroupName</span><br><span class="line">  */</span><br><span class="line"> public void trigger(String jobName, String jobGroupName) &#123;</span><br><span class="line">  log.info(&quot;触发任务&quot;);</span><br><span class="line">  try &#123;</span><br><span class="line">   JobKey key = new JobKey(jobName, jobGroupName);</span><br><span class="line">   scheduler.triggerJob(key);</span><br><span class="line">  &#125; catch (SchedulerException e) &#123;</span><br><span class="line">   e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> /**</span><br><span class="line">  * 获取所有计划中的任务列表</span><br><span class="line">  *</span><br><span class="line">  * @return</span><br><span class="line">  */</span><br><span class="line"> public List&lt;Map&lt;String, Object&gt;&gt; queryAllJob() &#123;</span><br><span class="line">  List&lt;Map&lt;String, Object&gt;&gt; jobList = null;</span><br><span class="line">  try &#123;</span><br><span class="line">   GroupMatcher&lt;JobKey&gt; matcher = GroupMatcher.anyJobGroup();</span><br><span class="line">   Set&lt;JobKey&gt; jobKeys = scheduler.getJobKeys(matcher);</span><br><span class="line">   jobList = new ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">   for (JobKey jobKey : jobKeys) &#123;</span><br><span class="line">    List&lt;? extends Trigger&gt; triggers = scheduler.getTriggersOfJob(jobKey);</span><br><span class="line">    for (Trigger trigger : triggers) &#123;</span><br><span class="line">     Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();</span><br><span class="line">     map.put(&quot;jobName&quot;, jobKey.getName());</span><br><span class="line">     map.put(&quot;jobGroupName&quot;, jobKey.getGroup());</span><br><span class="line">     map.put(&quot;description&quot;, &quot;触发器:&quot; + trigger.getKey());</span><br><span class="line">     Trigger.TriggerState triggerState = scheduler.getTriggerState(trigger.getKey());</span><br><span class="line">     map.put(&quot;jobStatus&quot;, triggerState.name());</span><br><span class="line">     if (trigger instanceof CronTrigger) &#123;</span><br><span class="line">      CronTrigger cronTrigger = (CronTrigger) trigger;</span><br><span class="line">      String cronExpression = cronTrigger.getCronExpression();</span><br><span class="line">      map.put(&quot;jobTime&quot;, cronExpression);</span><br><span class="line">     &#125;</span><br><span class="line">     jobList.add(map);</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125; catch (SchedulerException e) &#123;</span><br><span class="line">   e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line">  return jobList;</span><br><span class="line"> &#125;</span><br><span class="line"> /**</span><br><span class="line">  * 获取所有正在运行的job</span><br><span class="line">  *</span><br><span class="line">  * @return</span><br><span class="line">  */</span><br><span class="line"> public List&lt;Map&lt;String, Object&gt;&gt; queryRunJob() &#123;</span><br><span class="line">  List&lt;Map&lt;String, Object&gt;&gt; jobList = null;</span><br><span class="line">  try &#123;</span><br><span class="line">   List&lt;JobExecutionContext&gt; executingJobs = scheduler.getCurrentlyExecutingJobs();</span><br><span class="line">   jobList = new ArrayList&lt;Map&lt;String, Object&gt;&gt;(executingJobs.size());</span><br><span class="line">   for (JobExecutionContext executingJob : executingJobs) &#123;</span><br><span class="line">    Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();</span><br><span class="line">    JobDetail jobDetail = executingJob.getJobDetail();</span><br><span class="line">    JobKey jobKey = jobDetail.getKey();</span><br><span class="line">    Trigger trigger = executingJob.getTrigger();</span><br><span class="line">    map.put(&quot;jobName&quot;, jobKey.getName());</span><br><span class="line">    map.put(&quot;jobGroupName&quot;, jobKey.getGroup());</span><br><span class="line">    map.put(&quot;description&quot;, &quot;触发器:&quot; + trigger.getKey());</span><br><span class="line">    Trigger.TriggerState triggerState = scheduler.getTriggerState(trigger.getKey());</span><br><span class="line">    map.put(&quot;jobStatus&quot;, triggerState.name());</span><br><span class="line">    if (trigger instanceof CronTrigger) &#123;</span><br><span class="line">     CronTrigger cronTrigger = (CronTrigger) trigger;</span><br><span class="line">     String cronExpression = cronTrigger.getCronExpression();</span><br><span class="line">     map.put(&quot;jobTime&quot;, cronExpression);</span><br><span class="line">    &#125;</span><br><span class="line">    jobList.add(map);</span><br><span class="line">   &#125;</span><br><span class="line">  &#125; catch (SchedulerException e) &#123;</span><br><span class="line">   e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line">  return jobList;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5、测试"><a href="#5、测试" class="headerlink" title="5、测试"></a>5、测试</h3><p>使用CommandLineRunner实现在应用初始化时初始化任务。需要实现其run()方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class TestQuartzTask implements CommandLineRunner &#123;</span><br><span class="line"> @Autowired</span><br><span class="line"> ScheduleJobManage scheduleJobManage;</span><br><span class="line"> public void run(String... args) throws Exception &#123;</span><br><span class="line">  System.out.println(&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;服务启动执行，执行加载数据等操作&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&quot;); </span><br><span class="line">  HashMap&lt;String,Object&gt; map = new HashMap&lt;String, Object&gt;();</span><br><span class="line">        map.put(&quot;name&quot;,1);     </span><br><span class="line">        ScheduleJobEntity scheduleJobEntity = new ScheduleJobEntity();     </span><br><span class="line">        scheduleJobManage.deleteJob(&quot;job&quot;, &quot;test&quot;);</span><br><span class="line">        scheduleJobManage.saveCronJob(Job.class, &quot;job&quot;, &quot;test&quot;, &quot;0 * * * * ?&quot;, map);</span><br><span class="line">        map.put(&quot;name&quot;,2);</span><br><span class="line">        scheduleJobManage.deleteJob(&quot;job2&quot;, &quot;test&quot;);</span><br><span class="line">        scheduleJobManage.saveCronJob(Job.class, &quot;job2&quot;, &quot;test&quot;, &quot;10 * * * * ?&quot;, map);</span><br><span class="line">        map.put(&quot;name&quot;,3);</span><br><span class="line">        scheduleJobManage.deleteJob(&quot;job3&quot;, &quot;test2&quot;);</span><br><span class="line">        scheduleJobManage.saveCronJob(Job.class, &quot;job3&quot;, &quot;test2&quot;, &quot;15 * * * * ?&quot;, map);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里实例化了三个任务进去，同时开启两个端口模拟测试任务调度情况。<br>模拟服务器1：<br><img src="https://img-blog.csdnimg.cn/2019090223484888.png" alt="在这里插入图片描述"><br>模拟服务器2：<br><img src="https://img-blog.csdnimg.cn/20190902234941532.png" alt="在这里插入图片描述"><br>由上面运行情况可以看出3个任务在两台模拟服务器上同时只能有一个执行成功。</p>
+<p>PS:quartz分布式任务调度是通过数据库悲观锁实现的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+<div>
+  
+    ﻿<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/springboot/" rel="tag"># springboot</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/19/springboot2.0 + redis集群配置/" rel="next" title="springboot2.0 + redis集群配置">
+                <i class="fa fa-chevron-left"></i> springboot2.0 + redis集群配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/smoky.jpg" alt="sunkening">
+            
+              <p class="site-author-name" itemprop="name">sunkening</p>
+              <p class="site-description motion-element" itemprop="description">纸上得来终觉浅，绝知此事要躬行</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1230117&auto=1&height=66"></iframe>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sunkening0" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:812610493@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/project_sun" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://winterchen.com/" title="winterchen" target="_blank">winterchen</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://eelve.com/" title="南国薏米" target="_blank">南国薏米</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用步骤："><span class="nav-number">1.</span> <span class="nav-text">使用步骤：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、pom配置"><span class="nav-number">1.1.</span> <span class="nav-text">1、pom配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、application-quartz-yml配置"><span class="nav-number">1.2.</span> <span class="nav-text">2、application-quartz.yml配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、实现一个任务类"><span class="nav-number">1.3.</span> <span class="nav-text">3、实现一个任务类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、实现对定时任务的操作"><span class="nav-number">1.4.</span> <span class="nav-text">4、实现对定时任务的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、测试"><span class="nav-number">1.5.</span> <span class="nav-text">5、测试</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sunkening</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
