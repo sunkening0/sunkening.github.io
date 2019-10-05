@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-03T06:48:34.876Z</updated>
+  <updated>2019-10-03T06:51:25.614Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2019/10/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7/"/>
     <id>http://yoursite.com/2019/10/03/多线程异常捕获/</id>
     <published>2019-10-03T02:02:48.000Z</published>
-    <updated>2019-10-03T06:48:34.876Z</updated>
+    <updated>2019-10-03T06:51:25.614Z</updated>
     
     <content type="html"><![CDATA[<p>在java多线程程序中，所有线程都不允许抛出未捕获的checkedexception，也就是说各个线程需要自己把自己的checkedexception处理掉。</p><a id="more"></a><p>这一点是通过java.lang.Runnable.run()方法声明(因为此方法声明上没有throwexception部分)进行了约束。但是线程依然有可能抛出unchecked exception，当此类异常跑抛出时，线程就会终结，而对于主线程和其他线程完全不受影响，且完全感知不到某个线程抛出的异常(也是说完全无法catch到这个异常)。JVM的这种设计源自于这样一种理念：“线程是独立执行的代码片断，线程的问题应该由线程自己来解决，而不要委托到外部。”基于这样的设计理念，在Java中，线程方法的异常（无论是checked还是unchecked exception），都应该在线程代码边界之内（run方法内）进行try catch并处理掉。<br>   但如果线程确实没有自己try catch某个unchecked exception，而我们又想在线程代码边界之外（run方法之外）来捕获和处理这个异常的话，java为我们提供了一种线程内发生异常时能够在线程代码边界之外处理异常的回调机制，即Thread对象提供的setUncaughtExceptionHandler(Thread.UncaughtExceptionHandler eh)方法。通过该方法给某个thread设置一个UncaughtExceptionHandler，可以确保在该线程出现异常时能通过回调UncaughtExceptionHandler接口的public void uncaughtException(Thread t, Throwable e)方法来处理异常，这样的好处或者说目的是可以在线程代码边界之外（Thread的run()方法之外），有一个地方能处理未捕获异常。但是要特别明确的是：虽然是在回调方法中处理异常，但这个回调方法在执行时依然还在抛出异常的这个线程中！另外还要特别说明一点：如果线程是通过线程池创建，线程异常发生时UncaughtExceptionHandler接口不一定会立即回调。</p><p>   比之上述方法，还有一种编程上的处理方式可以借鉴，即，有时候主线程的调用方可能只是想知道子线程执行过程中发生过哪些异常，而不一定会处理或是立即处理，那么发起子线程的方法可以把子线程抛出的异常实例收集起来作为一个Exception的List返回给调用方，由调用方来根据异常情况决定如何应对。不过要特别注意的是，此时子线程早以终结。</p><p>原文链接：<a href="https://blog.csdn.net/bluishglc/article/details/8216824" target="_blank" rel="noopener">https://blog.csdn.net/bluishglc/article/details/8216824</a></p>]]></content>
     
