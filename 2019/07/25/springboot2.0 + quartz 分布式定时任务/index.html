@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019090223484888.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190902234941532.png">
-<meta property="og:updated_time" content="2019-09-05T00:40:18.160Z">
+<meta property="og:updated_time" content="2019-11-29T14:17:36.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springboot2.0 + quartz 分布式定时任务">
 <meta name="twitter:description" content="因项目是集群部署，因此同样的定时任务，在集群中的每台机器都会执行，这样定时任务就会重复执行，不但会增加服务器的负担，还会因为定时任务重复执行造成额外的不可预期的错误。因此下面采用 spring-boot-starter-quartz 实现分布式任务部署。">
@@ -371,7 +371,7 @@
 <h3 id="5、测试"><a href="#5、测试" class="headerlink" title="5、测试"></a>5、测试</h3><p>使用CommandLineRunner实现在应用初始化时初始化任务。需要实现其run()方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class TestQuartzTask implements CommandLineRunner &#123;</span><br><span class="line"> @Autowired</span><br><span class="line"> ScheduleJobManage scheduleJobManage;</span><br><span class="line"> public void run(String... args) throws Exception &#123;</span><br><span class="line">  System.out.println(&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;服务启动执行，执行加载数据等操作&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&quot;); </span><br><span class="line">  HashMap&lt;String,Object&gt; map = new HashMap&lt;String, Object&gt;();</span><br><span class="line">        map.put(&quot;name&quot;,1);     </span><br><span class="line">        ScheduleJobEntity scheduleJobEntity = new ScheduleJobEntity();     </span><br><span class="line">        scheduleJobManage.deleteJob(&quot;job&quot;, &quot;test&quot;);</span><br><span class="line">        scheduleJobManage.saveCronJob(Job.class, &quot;job&quot;, &quot;test&quot;, &quot;0 * * * * ?&quot;, map);</span><br><span class="line">        map.put(&quot;name&quot;,2);</span><br><span class="line">        scheduleJobManage.deleteJob(&quot;job2&quot;, &quot;test&quot;);</span><br><span class="line">        scheduleJobManage.saveCronJob(Job.class, &quot;job2&quot;, &quot;test&quot;, &quot;10 * * * * ?&quot;, map);</span><br><span class="line">        map.put(&quot;name&quot;,3);</span><br><span class="line">        scheduleJobManage.deleteJob(&quot;job3&quot;, &quot;test2&quot;);</span><br><span class="line">        scheduleJobManage.saveCronJob(Job.class, &quot;job3&quot;, &quot;test2&quot;, &quot;15 * * * * ?&quot;, map);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里实例化了三个任务进去，同时开启两个端口模拟测试任务调度情况。<br>模拟服务器1：<br><img src="https://img-blog.csdnimg.cn/2019090223484888.png" alt="在这里插入图片描述"><br>模拟服务器2：<br><img src="https://img-blog.csdnimg.cn/20190902234941532.png" alt="在这里插入图片描述"><br>由上面运行情况可以看出3个任务在两台模拟服务器上同时只能有一个执行成功。</p>
-<p>PS:quartz分布式任务调度是通过数据库悲观锁实现的（后边专门出一篇讲一下实现原理）。</p>
+<p>PS:quartz分布式任务调度是通过数据库悲观锁实现的。</p>
 
       
     </div>
@@ -503,7 +503,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
