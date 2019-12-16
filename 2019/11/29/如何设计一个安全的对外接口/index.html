@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="南风北巷">
 <meta property="og:description" content="如果项目需要对外提供一个接口，提供公网域名进行访问，那么安全性就很重要；这里整理了一下常用的一些安全措施以及具体如何去实现。安全措施大体来看主要在两个方面，一方面就是如何保证数据在传输过程中的安全性，另一个方面是数据已经到达服务器端，服务器端如何识别数据，如何不被攻击。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-29T14:23:27.623Z">
+<meta property="og:updated_time" content="2019-12-16T02:57:50.446Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何设计一个安全的对外接口?">
 <meta name="twitter:description" content="如果项目需要对外提供一个接口，提供公网域名进行访问，那么安全性就很重要；这里整理了一下常用的一些安全措施以及具体如何去实现。安全措施大体来看主要在两个方面，一方面就是如何保证数据在传输过程中的安全性，另一个方面是数据已经到达服务器端，服务器端如何识别数据，如何不被攻击。">
@@ -394,7 +394,6 @@ if(serverTime-clientTime&gt;interval){
 </code></pre><p>以上代码表示一秒钟只允许处理五个并发请求，以上方式只能用在单应用的请求限流，不能进行全局限流；这个时候就需要分布式限流，可以基于redis+lua来实现；</p>
 <p>6.黑名单机制<br>如何为什么中黑我们这边不讨论，我们可以给每个用户设置一个状态比如包括：初始化状态，正常状态，中黑状态，关闭状态等等；或者我们直接通过分布式配置中心，直接保存黑名单列表，每次检查是否在列表中即可；</p>
 <p>7.数据合法性校验<br>合法性校验包括：常规性校验以及业务校验；<br>常规性校验：包括签名校验，必填校验，长度校验，类型校验，格式校验等；<br>业务校验：根据实际业务而定，比如订单金额不能小于0等；</p>
-<p>————————————————<br>原文链接：<a href="https://blog.csdn.net/Dome_/article/details/103299890" target="_blank" rel="noopener">https://blog.csdn.net/Dome_/article/details/103299890</a></p>
 
       
     </div>
