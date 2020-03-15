@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-16T02:57:50.446Z</updated>
+  <updated>2020-02-14T15:46:18.961Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,138 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>rabbitmq（一）（五种队列、四种交换机模式）</title>
+    <link href="http://yoursite.com/2020/02/14/rabbitmq%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%88%E4%BA%94%E7%A7%8D%E9%98%9F%E5%88%97%E3%80%81%E5%9B%9B%E7%A7%8D%E4%BA%A4%E6%8D%A2%E6%9C%BA%E6%A8%A1%E5%BC%8F%EF%BC%89/"/>
+    <id>http://yoursite.com/2020/02/14/rabbitmq（一）（五种队列、四种交换机模式）/</id>
+    <published>2020-02-14T13:41:59.000Z</published>
+    <updated>2020-02-14T15:46:18.961Z</updated>
+    
+    <content type="html"><![CDATA[<p>rabbitmq（一）（五种队列、四种交换机模式）</p><a id="more"></a> <p>rabbitmq（一）（五种队列、四种交换机模式）</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;rabbitmq（一）（五种队列、四种交换机模式）&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="springboot" scheme="http://yoursite.com/categories/springboot/"/>
+    
+    
+      <category term="springboot" scheme="http://yoursite.com/tags/springboot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>springboot2.0 + shiro集成（六）注解验证</title>
+    <link href="http://yoursite.com/2020/02/14/springboot2.0%20+%20shiro%E9%9B%86%E6%88%90%EF%BC%88%E5%85%AD%EF%BC%89%E6%B3%A8%E8%A7%A3%E9%AA%8C%E8%AF%81/"/>
+    <id>http://yoursite.com/2020/02/14/springboot2.0 + shiro集成（六）注解验证/</id>
+    <published>2020-02-14T13:40:59.000Z</published>
+    <updated>2020-02-14T15:44:42.858Z</updated>
+    
+    <content type="html"><![CDATA[<p>我们必须接受失望,因为它是有限的,但千万不可失去希望,因为它是无穷的。 -马丁.路德.金</p><a id="more"></a> <p>springboot2.0 + shiro集成（六）注解验证</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我们必须接受失望,因为它是有限的,但千万不可失去希望,因为它是无穷的。 -马丁.路德.金&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="springboot" scheme="http://yoursite.com/categories/springboot/"/>
+    
+    
+      <category term="springboot" scheme="http://yoursite.com/tags/springboot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>springboot2.0 + shiro集成（五）异常处理</title>
+    <link href="http://yoursite.com/2020/02/14/springboot2.0%20+%20shiro%E9%9B%86%E6%88%90%EF%BC%88%E4%BA%94%EF%BC%89%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
+    <id>http://yoursite.com/2020/02/14/springboot2.0 + shiro集成（五）异常处理/</id>
+    <published>2020-02-14T13:40:05.000Z</published>
+    <updated>2020-02-14T15:45:52.670Z</updated>
+    
+    <content type="html"><![CDATA[<p>这城市越大越让人心慌。</p><a id="more"></a> <p>springboot2.0 + shiro集成（五）异常处理</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这城市越大越让人心慌。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="springboot" scheme="http://yoursite.com/categories/springboot/"/>
+    
+    
+      <category term="springboot" scheme="http://yoursite.com/tags/springboot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>springboot2.0 + shiro集成（四）多realm验证</title>
+    <link href="http://yoursite.com/2020/02/14/springboot2.0%20+%20shiro%E9%9B%86%E6%88%90%EF%BC%88%E5%9B%9B%EF%BC%89%E5%A4%9Arealm%E9%AA%8C%E8%AF%81/"/>
+    <id>http://yoursite.com/2020/02/14/springboot2.0 + shiro集成（四）多realm验证/</id>
+    <published>2020-02-14T13:40:04.000Z</published>
+    <updated>2020-02-14T15:45:44.249Z</updated>
+    
+    <content type="html"><![CDATA[<p>直道相思了无益，未妨惆怅是清狂。</p><a id="more"></a> <p>springboot2.0 + shiro集成（四）多realm验证</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;直道相思了无益，未妨惆怅是清狂。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="springboot" scheme="http://yoursite.com/categories/springboot/"/>
+    
+    
+      <category term="springboot" scheme="http://yoursite.com/tags/springboot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>springboot2.0 + shiro集成（三）记住我</title>
+    <link href="http://yoursite.com/2020/02/14/springboot2.0%20+%20shiro%E9%9B%86%E6%88%90%EF%BC%88%E4%B8%89%EF%BC%89%E8%AE%B0%E4%BD%8F%E6%88%91/"/>
+    <id>http://yoursite.com/2020/02/14/springboot2.0 + shiro集成（三）记住我/</id>
+    <published>2020-02-14T13:40:03.000Z</published>
+    <updated>2020-02-14T15:45:35.243Z</updated>
+    
+    <content type="html"><![CDATA[<p>从此无心爱良夜，任她明月下西楼。</p><a id="more"></a> <p>springboot2.0 + shiro集成（三）记住我</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;从此无心爱良夜，任她明月下西楼。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="springboot" scheme="http://yoursite.com/categories/springboot/"/>
+    
+    
+      <category term="springboot" scheme="http://yoursite.com/tags/springboot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>springboot2.0 + shiro集成（二）session共享</title>
+    <link href="http://yoursite.com/2020/02/14/springboot2.0%20+%20shiro%E9%9B%86%E6%88%90%EF%BC%88%E4%BA%8C%EF%BC%89session%E5%85%B1%E4%BA%AB/"/>
+    <id>http://yoursite.com/2020/02/14/springboot2.0 + shiro集成（二）session共享/</id>
+    <published>2020-02-14T13:40:02.000Z</published>
+    <updated>2020-02-14T15:45:27.733Z</updated>
+    
+    <content type="html"><![CDATA[<p>风吹北巷南街伤，花落南国北亭凉。</p><a id="more"></a> <p>springboot2.0 + shiro集成（二）session共享</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;风吹北巷南街伤，花落南国北亭凉。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="springboot" scheme="http://yoursite.com/categories/springboot/"/>
+    
+    
+      <category term="springboot" scheme="http://yoursite.com/tags/springboot/"/>
+    
+  </entry>
   
   <entry>
     <title>如何设计一个安全的对外接口?</title>
