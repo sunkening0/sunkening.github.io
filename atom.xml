@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-30T15:45:46.279Z</updated>
+  <updated>2020-02-14T15:46:18.961Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,30 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>20200330</title>
-    <link href="http://yoursite.com/2020/03/30/20200330/"/>
-    <id>http://yoursite.com/2020/03/30/20200330/</id>
-    <published>2020-03-30T15:34:47.000Z</published>
-    <updated>2020-03-30T15:45:46.279Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>戒掉了可乐，整整一年</p></blockquote><a id="more"></a> <pre><code>时间过的真快，分手都一年了。闲来无事，写一下自己的心路历程吧。这一年心理上经历了很多，心里挺难过的也挺郁闷，总是暗示自己说不想了，可是有些东西感觉真的没那么好过去，可能就好像这一辈子都能记到这些事。回想在一起的那快两年时间，其实我也知道主动的多是你，你属于活泼开朗的那一种，而我或许在别人看来就属于比较闷的那一种，有时候总听你说，我们两个是不是反了，可能像我这种人就是属于那种不咋能讨人开心的人吧。你应该也是觉得很累吧这样。其实后来想想感情是需要调和的，我这样也有点固执了。以前总觉得你脾气不好，有时候我想想自己这脾气也应该是很气人的吧，总觉得自己想的是好的，也许事情都没有什么绝对的对错，如果当时能多替你想一下，让你在我心里是很重要的，应该会好一些。曾经向往那些从一而终的爱情，现在也挺愧疚的，没能陪你到最后。曾经我觉得想像别人说的那样，既然觉得不合适，既然分开了，就算了，就不要想了，也这样试过，去找点别的事做，转移下注意力。后来才发现转移注意力是挺容易的，可是有的东西在心里也是抹不掉的。你走之后，好像总能看到119这三个数字，就像以前总是觉得自己会单身一辈子就一直看到1111一样吧，小区门口开了家米线店，叫蓝胖子，关键老板还姓张，习惯早上去的时候听着歌走到地铁站，你生日的那天，每日推荐里就推荐了那么一首生日快乐，努力忘记的东西又好像有人提醒着你别忘了。也许这都是心理作用吧。有时候觉得现在又跟你说起这些是不合时宜的，也许你已经放下了这样又勾起那些回忆，但心里有些话一直没跟你说，现在不说怕以后也没什么说的机会了。谢谢你曾经对我的好，让我往后整个人生，哪怕黑暗，哪怕觉得生活很辛苦，哪怕突然有一刻想一了百了，想起你就觉得，我应该再等等夏天的大西瓜，因为它真的很甜很好吃，我应该去试试冬天的那个漂亮的羽绒服，因为它真的很暖很柔软，那是我曾经想靠近你的灵魂，学会的爱这个世界的方式。“怪我当时太年轻，毁了你当初好多温柔”，这话虽矫情，但本身就是这样吧，以前你生了那么多气，我也有做的不好的地方。乱七八糟的写了这些，也是够矫情了，在一起的时候都从没说过这么多心里话，想想自己也挺好笑的。说真的，其实挺难真正的放下的，可能时间还是不够久，可能是别的什么。跟你说了这些如果已经打扰到你了，也希望你不要在意，就算最后做个总结吧。无论以后怎么样，我都希望你能越来越好，我也相信你会越来越好的。但是如果你想回来了，你要知道我也会一直等到你，不想留下什么遗憾。</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;戒掉了可乐，整整一年&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="日记" scheme="http://yoursite.com/categories/%E6%97%A5%E8%AE%B0/"/>
-    
-    
-      <category term="日记" scheme="http://yoursite.com/tags/%E6%97%A5%E8%AE%B0/"/>
-    
-  </entry>
   
   <entry>
     <title>rabbitmq（一）（五种队列、四种交换机模式）</title>
@@ -465,6 +441,30 @@
     
     
       <category term="javase" scheme="http://yoursite.com/tags/javase/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Boot获取前端页面参数的几种方式总结</title>
+    <link href="http://yoursite.com/2019/03/13/springboot/"/>
+    <id>http://yoursite.com/2019/03/13/springboot/</id>
+    <published>2019-03-13T09:02:47.000Z</published>
+    <updated>2019-08-30T10:13:19.182Z</updated>
+    
+    <content type="html"><![CDATA[<p>Spring Boot的一个好处就是通过注解可以轻松获取前端页面的参数，之后可以将参数经过一系列处理传送到后台数据库，这里稍微总结一下，大致分为以下几种：</p><a id="more"></a> <p>Spring Boot的一个好处就是通过注解可以轻松获取前端页面的参数，之后可以将参数经过一系列处理传送到后台数据库，这里稍微总结一下，大致分为以下几种： </p><p>1.指定前端url请求参数名称与方法名一致，见下图，这种方式简单来说就是url请求格式中的参数需要与方法的参数名称对应上，举个例子，这么一个url请求<a href="http://localhost:8080/0919/test1?name=xxx&amp;pwd=yyy，在指定的控制器类上加上Controller注解，同时指定RequestMapping注解即可，当请求路径参数与方法参数匹配上时会自动注入" target="_blank" rel="noopener">http://localhost:8080/0919/test1?name=xxx&amp;pwd=yyy，在指定的控制器类上加上Controller注解，同时指定RequestMapping注解即可，当请求路径参数与方法参数匹配上时会自动注入</a><br><img src="/2019/03/13/springboot/20190313162011284.png" alt="在这里插入图片描述"><br>启动主程序，访问浏览器出现下图，表明注入参数成功，这种方式一般是get请求<br><img src="/2019/03/13/springboot/20190313162032404.png" alt="在这里插入图片描述"><br>2.第二种方式是通过HttpServletRequest来获取前端页面参数，代码见下图 ，简单来说就是通过调用request的getParameter方法来获取参数，比如访问路径类似这样<a href="http://localhost:8080/0919/test2?firstName=zhang&amp;lastName=san" target="_blank" rel="noopener">http://localhost:8080/0919/test2?firstName=zhang&amp;lastName=san</a><br><img src="/2019/03/13/springboot/20190313162149681.png" alt="在这里插入图片描述"><br>启动主程序，访问浏览器出现下图，表明注入参数成功，这种方式也可以获取表单参数，一般get和post请求都可以<br><img src="/2019/03/13/springboot/20190313162217192.png" alt="在这里插入图片描述"><br>3.第三种方式是通过创建一个JavaBean对象来封装表单参数或者是请求url路径中的参数，具体代码见下图<br><img src="/2019/03/13/springboot/2019031316224242.png" alt="在这里插入图片描述"><br>对应的JavaBean对象是下面这个<br><img src="/2019/03/13/springboot/20190313162259147.png" alt="在这里插入图片描述"><br>简单来说就是将表单参数作为一个JavaBean类的属性，通过设置方法参数为一个JavaBean对象，之后在方法中通过调用对象的get方法来获取表单传过来的参数，比如访问路径是这个<a href="http://localhost:8080/0919/test3?firstName=zhang&amp;lastName=san" target="_blank" rel="noopener">http://localhost:8080/0919/test3?firstName=zhang&amp;lastName=san</a> 启动主程序，在浏览器访问见下图，表明注入参数成功，这种方式如果请求的表单参数很多可以考虑使用这种方式<br><img src="/2019/03/13/springboot/20190313162338182.png" alt="在这里插入图片描述"></p><p>４.第四种方式是通过PathVariable注解来绑定请求路径的参数，参考代码见下<br><img src="/2019/03/13/springboot/2019031316244739.png" alt="在这里插入图片描述"><br>这种情况简单来说就是url中采用动态绑定的形式表示，之后在方法中指定的参数通过PathVariable来将请求的url中的参数绑定到方法参数，这里在不指定PathVariable注解的具体值时按照请求路径中的动态变量顺序与注解顺序一致即可注入 ，如果想指定注入，那么指定PathVariable注解的值与动态变量的名一致即可特定注入。比如请求路径是这个<a href="http://localhost:8080/0919/test4/111/222" target="_blank" rel="noopener">http://localhost:8080/0919/test4/111/222</a><br>启动主程序，在浏览器访问，出现下图表明注入参数成功<br><img src="/2019/03/13/springboot/20190313162554421.png" alt="在这里插入图片描述"></p><p>５.第五种方式是通过RequestParam注解来获取，具体代码见下<br><img src="/2019/03/13/springboot/20190313162617816.png" alt="在这里插入图片描述"><br>这种方式是通过url路径的形式将请求路径上的参数绑定到方法的参数上，简单来说就是实参值赋给相应的形参，与上面那种方式的区别是前者是动态url模板注入，这里是个普通的url请求注入·，比如访问路径是这个<a href="http://localhost:8080/0919/test5?aaa=111&amp;bbb=4444" target="_blank" rel="noopener">http://localhost:8080/0919/test5?aaa=111&amp;bbb=4444</a><br>启动主程序，访问该请求，浏览器出现下面这个表明注入参数成功，这里可以通过指定RequestParam的value值来指定url请求路径参数指定注入到哪个具体方法参数，不过一般两者名字一致比较方便<br><img src="/2019/03/13/springboot/2019031316270556.png" alt="在这里插入图片描述"></p><p>6.第六种方式是通过ModelAttribute方式来注入参数，具体代码见下 </p><p><img src="/2019/03/13/springboot/20190313162755231.png" alt="在这里插入图片描述"></p><p>这种方式一般是通过在页面展示，所以这里创建两个页面做测试test2.jsp和test3.jsp进行测试</p><p><img src="/2019/03/13/springboot/20190313162819802.png" alt="在这里插入图片描述"><br><img src="/2019/03/13/springboot/20190313162840948.png" alt="在这里插入图片描述"></p><p><img src="/2019/03/13/springboot/20190313162853254.png" alt="在这里插入图片描述"><br>简单来说就是通过ModelAttribute注解将请求参数封装到指定的JavaBean对象，同时通过value值将这个接受了表单参数的对象赋给value，这里就是将s赋给了一个变量名为kkk的存在，之后就可以在jsp页面通过这个变量名使用el表达式来获取从表单传过来的参数，这里测试路径是<a href="http://localhost:8080/0919/kkk，访问在浏览器进行测试，见下图" target="_blank" rel="noopener">http://localhost:8080/0919/kkk，访问在浏览器进行测试，见下图</a> </p><p><img src="/2019/03/13/springboot/20190313162922853.png" alt="在这里插入图片描述"><br> 点击提交，出现下图，表明表单参数成功被后台接受并在前台页面输出，这种方式一般是需要在前台页面输出的时候使用<br> <img src="/2019/03/13/springboot/20190313162945766.png" alt="在这里插入图片描述"><br> 总的来说Spring Boot获取前端页面参数的方式大致就上面这几种，可以根据自己的实际情况来选择其中的任意一种方式，个人一般推荐前三种方式，当然具体选哪种还是因人而异。这里简单写了一点简单demo做下测试记录防止长时间不用又忘了，毕竟博客的作用就是这样嘛。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Spring Boot的一个好处就是通过注解可以轻松获取前端页面的参数，之后可以将参数经过一系列处理传送到后台数据库，这里稍微总结一下，大致分为以下几种：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="spring" scheme="http://yoursite.com/categories/spring/"/>
+    
+    
+      <category term="springboot" scheme="http://yoursite.com/tags/springboot/"/>
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
     
   </entry>
   
